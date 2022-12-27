@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>🎄Feliz Natal!</title>
+  </head>
+  <body>
+    <style>
+      body {
+        background-color: black;
+        height: 100vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      #pyramid {
+        text-align: center;
+        font-size: 30px;
+        line-height: 150%;
+      }
+      #pyramid :first-child {
+        text-shadow: 0px 0px 30px white;
+      }
+      #pyramid :last-child {
+        font-size: 50px;
+      }
+      h1 {
+        font-size: 30px;
+        text-align: center;
+        color: white;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      #pyramid h2.natalMsg {
+        font-size: 25px;
+        color: white;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .app {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+      }
+      .form {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+      }
+      .form * {
+        font-size: 20px;
+        border-radius: 7px;
+        padding: 10px 5px;
+      }
+      .form button {
+        background-color: green;
+        color: white;
+        cursor: pointer;
+      }
+    </style>
+
+    <div class="app">
+      <h1>🎄Gerador de Arvore de Natal🎄</h1>
+      <div class="form">
+        <input
+          id="quantCamadas"
+          placeholder="Tamanho da árvore"
+          type="number"
+        />
+        <button onclick="pyramidGenerate()">Gerar</button>
+      </div>
+
+      <div id="pyramid"></div>
+    </div>
+
+    <script>
+      function pyramidGenerate() {
+        function getRandomInt(min, max) {
+          min = Math.ceil(min);
+          max = Math.floor(max);
+          return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function genarateDecoration(decoration) {
+          let value = "";
+          switch (decoration) {
+            case 0:
+              value = "🔴";
+              break;
+            case 1:
+              value = "⚪";
+              break;
+            case 2:
+              value = "🏑";
+              break;
+            default:
+              value = "🍃";
+              break;
+          }
+          return value;
+        }
+
+        function addRandomBall(pos, idx) {
+          let format = pos;
+          let value = format.split("🍃");
+          let quant = value.length;
+          let newValue = "";
+
+          for (let i = 0; i < quant; i++) {
+            const randomDecoration = genarateDecoration(getRandomInt(0, 2));
+
+            if (idx % 2) {
+              if (i % 2) {
+                value[i] = randomDecoration;
+              } else {
+                value[i] = "🍃";
+              }
+            } else {
+              if (i % 2) {
+                value[i] = "🍃";
+              } else {
+                value[i] = randomDecoration;
+              }
+            }
+          }
+          for (let i = 0; i < quant; i++)
+            if (i < quant) {
+              newValue += value[i];
+            }
+
+          return newValue;
+        }
+
+        function getQuantPaper(quant) {
+          let value = "";
+          for (i = 0; i < quant; i++) {
+            value += "🍃";
+          }
+          console.log(value);
+          return value;
+        }
+
+        const pyramid = document.querySelector("#pyramid");
+        pyramid.innerHTML = "";
+        let quant = document.querySelector("#quantCamadas").value;
+        let emoji = "";
+        for (let l = 0; l < quant; l++) {
+          const p = document.createElement("div");
+
+          if (l != 0) {
+            emoji = "🍃";
+            p.innerText = addRandomBall(getQuantPaper(l), l);
+          } else {
+            emoji = "⭐";
+            p.innerText = `${emoji}`;
+          }
+          pyramid.appendChild(p);
+        }
+        const p = document.createElement("div");
+        p.innerText = `🎁🎁🪵🎁🎁`;
+        pyramid.appendChild(p);
+
+        const msg = document.createElement("h2");
+        msg.className = "natalMsg";
+        msg.innerText = "🎄Feliz Natal!🎄";
+        pyramid.appendChild(msg);
+      }
+    </script>
+  </body>
+</html>
