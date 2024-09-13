@@ -58,11 +58,11 @@ Se preferir, você pode testar o projeto diretamente no navegador através do [l
     <div style="display: flex; justify-content: center; gap: 20px;">
         <div>
             <p align="center">2022</p>
-            <img src="screenshots/print.jpg" alt="Print do Projeto" height="500px"/>
+            <img src="screenshots/print.jpg" alt="Print do Projeto" height="300px"/>
         </div>
         <div>
             <p align="center">2024</p>
-            <img src="screenshots/print-2024.png" alt="Print do Projeto" height="500px"/>
+            <img src="screenshots/print-2024.png" alt="Print do Projeto" height="300px"/>
         </div>
     </div>
 </p>
